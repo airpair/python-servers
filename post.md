@@ -17,7 +17,7 @@ The Http Server( a program ) will accept this request and will let your python s
 ```python
 @app.route('\displaynews\<name_of_category>',methods=['GET'])
 ```
-You might have used this decorator in Flask. Flask will pattern match this route with the request from the browser.  But how does flask parse the http request from the browser? The Http Server passes the dynamically generated urls to the application server. Whoa ! wait .... What are application servers now?
+You might have used this decorator in Flask. [Flask](http://flask.pocoo.org/) is a microframework for python. Flask will pattern match this route with the request from the browser.  But how does flask parse the http request from the browser? The Http Server passes the dynamically generated urls to the application server. Whoa ! wait .... What are application servers now?
 
 Apache HTTPD and nginx are the two common web servers used with python.
 
@@ -39,11 +39,18 @@ mod_python is an Apache HTTP Server module that integrates the Python programmin
 
 These low-level gateway interfaces are language agnostic.
 
-####Rise of WSGI
+##Rise of WSGI
 A Web Server Gateway Interface (WSGI) server implements the web server side of the WSGI interface for running Python web applications. WSGI scales and can work in both multithreaded and multi process environments. We can also write middlewares with WSGI. Middlewares are useful for session handling, authentication and many more. You can read about how to write your WSGI implementation on [Armin's blog](http://lucumr.pocoo.org/2007/5/21/getting-started-with-wsgi/). A comparison between different WSGI implementations is given at [this link](https://www.digitalocean.com/community/tutorials/a-comparison-of-web-servers-for-python-based-web-applications).
 
+####Gunicorn and uWSGI
+Gunicorn and uWSGI are two different application servers.   
+[Gunicorn 'Green Unicorn'](http://gunicorn-docs.readthedocs.org/en/latest/) is a Python WSGI HTTP Server for UNIX. It is very simple to configure, compatible with many web frameworks and its fairly speedy. This [article](https://www.digitalocean.com/community/tutorials/how-to-deploy-python-wsgi-apps-using-gunicorn-http-server-behind-nginx) by digitalocean shows how to configure gunicorn with nginx.
+
+[uWSGI](https://uwsgi-docs.readthedocs.org/en/latest/) is another option for an application server. uWSGI is a high performance and a powerful WSGI server. There are many configuration options available with uWSGI. This [article](https://www.digitalocean.com/community/tutorials/how-to-deploy-python-wsgi-applications-using-uwsgi-web-server-with-nginx) by digitalocean shows how to configure uWSGI with nginx.
+
+
 ##Apache vs Nginx
-Anturis has explained quite lucidly the differences between the two on their [blog](https://anturis.com/blog/nginx-vs-apache/). 
+Anturis has explained quite lucidly the differences between the two on their [blog](https://anturis.com/blog/nginx-vs-apache/). This post explains how apache and nginx work.
 
 To summarize:   
 1. Apache creates processes and threads to handle additional connections. While  Nginx is said to be event-driven, asynchronous, and non-blocking. 
@@ -54,7 +61,7 @@ To summarize:
 The organicagency benchmarked the performances of Apache and nginx. The results are available [here](http://www.theorganicagency.com/apache-vs-nginx-performance-comparison/)
 
 ##What I use
-I use Nginx because it is fast , light and I find the configuration to be much easy. Gunicorn provides multiple workers . Also, its very simple to configure. So I use gunicorn. uWsgi is also used a lot instead of gunicorn.
+I use Nginx because it is fast , light and I find the configuration to be much easy. Gunicorn is very simple to configure. So I use gunicorn. uWsgi is also used a lot instead of gunicorn.
 
 Please share with me what do you prefer for your python applications? 
 
